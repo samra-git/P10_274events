@@ -5,7 +5,7 @@ import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
 
-const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 900); }) // setTime initialement à 1000
+const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 1000); }) // setTime initialement à 1000
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
@@ -18,10 +18,12 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
-        onSuccess();
+        onSuccess(); // ajout pour afficher la modale du message
       } catch (err) {
         setSending(false);
         onError(err);
+      } finally {
+        setSending(false)
       }
     },
     [onSuccess, onError]

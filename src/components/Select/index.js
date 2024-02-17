@@ -16,9 +16,9 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
+    onChange(newValue);
     setValue(newValue);
-    setCollapsed(newValue);
+    setCollapsed(!collapsed);
   };
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
@@ -50,7 +50,7 @@ const Select = ({
           )}
         </ul>
         <input type="hidden" value={value || ""} name={name} />
-        <button
+        <button // correspond au dérouleùent de la liste des catégories 
           type="button"
           data-testid="collapse-button-testid"
           className={collapsed ? "open" : "close"}

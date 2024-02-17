@@ -13,12 +13,11 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  
   const filteredEvents = (
-    (!type
-      ? data?.events
-      : data?.events) || []
+    (data?.events) || [] // suppression de !type (valeur false)
   ).filter((event, index) => {
-    if (
+    if ((!type || event.type === type) && // ajout de la condition false ou si type existe
       (currentPage - 1) * PER_PAGE <= index &&
       PER_PAGE * currentPage > index
     ) {
@@ -32,6 +31,8 @@ const EventList = () => {
   };
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
+// console.log(filteredEvents)
+  // console.log(typeList);
   return (
     <>
       {error && <div>An error occured</div>}
