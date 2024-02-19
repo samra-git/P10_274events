@@ -1,4 +1,4 @@
-
+DataContext
 // import PropTypes from "prop-types";
 // import {
 //   createContext,
@@ -64,3 +64,122 @@
 // export const useData = () => useContext(DataContext);
 
 // export default DataContext;
+
+
+
+slider
+
+// import { useEffect, useState } from "react";
+// import { useData } from "../../contexts/DataContext";
+// import { getMonth } from "../../helpers/Date";
+
+// import "./style.scss";
+
+// const Slider = () => {
+//   const { data } = useData();
+//   const [index, setIndex] = useState(0);
+//   const byDateDesc = data?.focus.sort((evtA, evtB) =>
+//     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+//   );
+
+//   const goToSlide = (radioIdx) => {
+//     setIndex(radioIdx);
+//   };
+
+//   useEffect(() => {
+//     const nextCard = setTimeout(
+//       () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+//       5000
+//     );
+//     return () => clearTimeout(nextCard);
+//   });
+
+//   // besoin de generer une key au hasard :
+//   const newId = () => Math.random();
+
+//   return (
+//     <div className="SlideCardList">
+//       {byDateDesc?.map((event, idx) => (
+//         <div
+//           key={event.title}
+//           className={`SlideCard SlideCard--${
+//             index === idx ? "display" : "hide"
+//           }`}
+//         >
+//           <img src={event.cover} alt="forum" />
+//           <div className="SlideCard__descriptionContainer">
+//             <div className="SlideCard__description">
+//               <h3>{event.title}</h3>
+//               <p>{event.description}</p>
+//               <div>{getMonth(new Date(event.date))}</div>
+//             </div>
+//           </div>
+//         </div>
+//       ))}
+//       <div className="SlideCard__paginationContainer">
+//         <div className="SlideCard__pagination">
+//           {byDateDesc?.map((evt, radioIdx) => (
+//             <input
+//               key={newId()}
+//               type="radio"
+//               name="radio-button"
+//               checked={index === radioIdx}
+//               onChange={() => goToSlide(radioIdx)}
+//             />
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Slider;
+
+
+
+slider/test:
+
+// import { render, screen } from "@testing-library/react";
+// import Slider from "./index";
+// import { api, DataProvider } from "../../contexts/DataContext";
+
+// const data = {
+//   focus: [
+//     {
+//       title: "World economic forum",
+//       description:
+//         "Oeuvre à la coopération entre le secteur public et le privé.",
+//       date: "2022-02-29T20:28:45.744Z",
+//       cover: "/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.png",
+//     },
+//     {
+//       title: "World Gaming Day",
+//       description: "Evenement mondial autour du gaming",
+//       date: "2022-03-29T20:28:45.744Z",
+//       cover: "/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.png",
+//     },
+//     {
+//       title: "World Farming Day",
+//       description: "Evenement mondial autour de la ferme",
+//       date: "2022-01-29T20:28:45.744Z",
+//       cover: "/images/evangeline-shaw-nwLTVwb7DbU-unsplash1.png",
+//     },
+//   ],
+// };
+
+// describe("When slider is created", () => {
+//   it("a list card is displayed", async () => {
+//     window.console.error = jest.fn();
+//     api.loadData = jest.fn().mockReturnValue(data);
+//     render(
+//       <DataProvider>
+//         <Slider />
+//       </DataProvider>
+//     );
+//     await screen.findByText("World economic forum");
+//     await screen.findByText("janvier");
+//     await screen.findByText(
+//       "Oeuvre à la coopération entre le secteur public et le privé."
+//     );
+//   });
+// });
