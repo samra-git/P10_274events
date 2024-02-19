@@ -16,9 +16,9 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange(newValue);
+    onChange(newValue); // attribution du paramètre à onchange
     setValue(newValue);
-    setCollapsed(!collapsed);
+    setCollapsed(!collapsed); // attribution de la valeur !collapse au state
   };
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
