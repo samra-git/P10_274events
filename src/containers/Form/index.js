@@ -5,11 +5,11 @@ import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
 
-const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); }) // setTime initialement à 1000
+const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 950); }) // setTime initialement à 1000 mais par défaut test à 1 sec donc
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
-  // const [dataForm, setdDataForm] = useState(null);
+ 
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
@@ -30,6 +30,8 @@ const Form = ({ onSuccess, onError }) => {
     },
     [onSuccess, onError]
   );
+
+
 
   
   return (

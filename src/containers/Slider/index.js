@@ -9,11 +9,12 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState();
   const byDateDesc = data?.focus ? data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) > new Date(evtB.date) ? 1 : -1  // placement du plus récent au plus ancien
+  // new Date(evtA) - new Date(evtB) // placement du plus récent au plus ancien
+    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1  
   ) : [];
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index > (byDateDesc.length-1) ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
+      () => setIndex(index < (byDateDesc.length-1) ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
       5000 
     );
   };
@@ -22,6 +23,10 @@ const Slider = () => {
   useEffect(() => {
     nextCard();
   }, );
+
+  
+
+
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
@@ -43,12 +48,14 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {byDateDesc.map((ev, radioIdx) => (
                 <input
-                  key={_.date}  // key unique
+                  key={`${ev.id}`}  // key unique
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // erreur corrigée idx remplacée par index conformément au useState
+                  readOnly
+                  
                 />
                 
               ))}

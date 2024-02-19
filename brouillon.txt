@@ -1,4 +1,4 @@
-DataContext
+*************************************DataContext*********************************
 // import PropTypes from "prop-types";
 // import {
 //   createContext,
@@ -67,7 +67,7 @@ DataContext
 
 
 
-slider
+**************************************slider*************************************************
 
 // import { useEffect, useState } from "react";
 // import { useData } from "../../contexts/DataContext";
@@ -137,7 +137,7 @@ slider
 
 
 
-slider/test:
+****************************slider/test***********************************
 
 // import { render, screen } from "@testing-library/react";
 // import Slider from "./index";
@@ -183,3 +183,49 @@ slider/test:
 //     );
 //   });
 // });
+
+
+
+
+
+*****************************test formulaire d'envoi***********************
+const Form = ({ onSuccess, onError }) => {
+  const [sending, setSending] = useState(false);
+  const [dataForm, setDataForm] = useState();
+
+  const formFill = {
+    nom: "",
+    prenom: "",
+    email: "",
+
+  }
+  const handleClick = () => {
+    setDataForm(formFill)
+  }
+  const sendContact = useCallback(
+    async (evt) => {
+      evt.preventDefault();
+        setSending(true);
+      // We try to call mockContactApi
+      try {
+        if (!dataForm) {
+            throw new Error("Veuillez saisir les champs")
+        }
+        const {nom, prenom, email } = dataForm;
+        if (!nom || !prenom || !email) {
+            throw new Error("Veuillez remplir tous les champs obligatoires du formulaire")
+        }
+        
+        await mockContactApi();
+        setSending(false);
+        onSuccess(); // ajout pour afficher la modale du message
+      } catch (err) {
+        setSending(false);
+        onError(err);
+      } 
+        
+      
+
+    },
+    [dataForm, onSuccess, onError]
+  );}
