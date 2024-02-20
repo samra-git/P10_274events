@@ -4,35 +4,41 @@ import { getMonth } from "../../helpers/Date";
 
 import "./style.scss";
 
+
 const Slider = () => {
  
   const { data } = useData();
-  const [index, setIndex] = useState();
-  const byDateDesc = data?.focus ? data?.focus.sort((evtA, evtB) =>
-  // new Date(evtA) - new Date(evtB) // placement du plus récent au plus ancien
+  const [index, setIndex] = useState(0);
+  const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1  
-  ) : [];
-  const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < (byDateDesc.length-1) ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
-      5000 
-    );
-  };
+  ); // placement du plus récent au plus ancien
+  
+  
 // console.log(byDateDesc);
  
   useEffect(() => {
-    nextCard();
+    const nextCard = 
+    setTimeout(
+      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
+      5000 
+    );
+ 
+    return () => clearTimeout(nextCard)
   }, );
 
-  
+  const generateKey = () => 
+     Math.random();
 
+     const goToSlide = (radioIdx) => {
+      setIndex(radioIdx);
+    };
 
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        
           <div
-            key={event.id}
+            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -45,15 +51,18 @@ const Slider = () => {
                 <div>{getMonth(new Date(event.date))}</div>
               </div>
             </div>
-          </div>
+          </div> 
+           ))}
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((ev, radioIdx) => (
+              {byDateDesc?.map((ev, radioIdx) => (
+                
                 <input
-                  key={`${ev.id}`}  // key unique
+                  key={ generateKey()}  // key unique
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // erreur corrigée idx remplacée par index conformément au useState
+                  onChange={() => goToSlide(radioIdx)}
                   readOnly
                   
                 />
@@ -61,11 +70,14 @@ const Slider = () => {
               ))}
             </div>
           </div>
-        </>
-      ))}
+        
+     
     </div>
   );
 };
 
 export default Slider;
 
+
+
+  

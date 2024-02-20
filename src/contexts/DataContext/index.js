@@ -34,7 +34,7 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
     
-  },[data]);  
+  },[getData]);  
   
 
 
