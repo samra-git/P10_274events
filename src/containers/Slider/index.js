@@ -15,21 +15,18 @@ const Slider = () => {
   
   
 // console.log(byDateDesc);
- 
-  useEffect(() => {
-    const nextCard = 
-    setTimeout(
+  
+useEffect(() => {
+const nextCard =
+  setTimeout(
       () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
       5000 
     );
- 
+    
     return () => clearTimeout(nextCard)
-  }, );
+  });
 
-  const generateKey = () => 
-     Math.random();
-
-     const goToSlide = (radioIdx) => {
+      const goToSlide = (radioIdx) => {
       setIndex(radioIdx);
     };
 
@@ -58,11 +55,11 @@ const Slider = () => {
               {byDateDesc?.map((ev, radioIdx) => (
                 
                 <input
-                  key={ generateKey()}  // key unique
+                  key={ev.title}  // key unique
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx} // erreur corrigée idx remplacée par index conformément au useState
-                  onChange={() => goToSlide(radioIdx)}
+                  onChange={() => goToSlide(radioIdx)} 
                   readOnly
                   
                 />
