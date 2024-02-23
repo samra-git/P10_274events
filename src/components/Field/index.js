@@ -12,10 +12,9 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
   switch (type) {
     case FIELD_TYPES.INPUT_TEXT:
       component = (
-        <input
-          type="text"
+        <input       
           name={name}
-          placeholder={placeholder}
+          placeholder={placeholder}       
           data-testid="field-testid"
           required
         />
@@ -31,7 +30,7 @@ const Field = ({ type = FIELD_TYPES.INPUT_TEXT, label, name, placeholder }) => {
           name={name}
           placeholder={placeholder}
           data-testid="field-testid"
-          
+          required
         />
       );
   }
@@ -48,12 +47,14 @@ Field.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  
 };
  Field.defaultProps = {
    label: "",
    placeholder: "",
    type: FIELD_TYPES.INPUT_TEXT,
    name: "field-name",
+  
  }
 
 export default Field;
