@@ -14,10 +14,13 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   
+  
   const filteredEvents = (
-    (data?.events) || [] // suppression de !type (valeur false)
+    (!type
+      ? data?.events
+      : data?.events) || []
   ).filter((event, index) => {
-    if ((!type || event.type === type) && // ajout de la condition false ou si type existe
+    if ((!type || event.type === type) &&  // ajout de la condition de :true (!type) et la correspondance de type à event.type
       (currentPage - 1) * PER_PAGE <= index &&
       PER_PAGE * currentPage > index
     ) {

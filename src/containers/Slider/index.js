@@ -11,7 +11,7 @@ const Slider = () => {
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1  
-  ); // placement du plus récent au plus ancien
+  ); 
   
   
 // console.log(byDateDesc);
@@ -19,7 +19,7 @@ const Slider = () => {
 useEffect(() => {
 const nextCard =
   setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
+      () => setIndex(index < byDateDesc.length -1 ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
       5000 
     );
     
