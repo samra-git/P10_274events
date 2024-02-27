@@ -19,7 +19,7 @@ const Slider = () => {
 useEffect(() => {
 const nextCard =
   setTimeout(
-      () => setIndex(index < byDateDesc.length -1 ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
+      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), // erreur dans byDateDesc.length ajout de -1 
       5000 
     );
     
